@@ -16,8 +16,8 @@ struct FlickrAPI {
     
     // MARK: - Stored Properties
     
-    private static let baseURLString = "https://api.flickr.com/services/rest"
-    private static let APIKey = "a​6​d​8​1​9​4​9​9​1​3​1​0​7​1​f​1​5​8​f​d​7​4​0​8​6​0​a​5​a​8​8"
+    private static let baseURLString = "https://api.flickr.com/services/rest/?"
+    private static let APIKey = "ac4c9d25dce464b5e775829d9f5ceec9"
     
     // MARK: - Local Methods
     
@@ -29,7 +29,7 @@ struct FlickrAPI {
             "method": method.rawValue,
             "api_key": APIKey,
             "format": "json",
-            "nojsoncallback": "1",
+            "nojsoncallback": "1"
         ]
         for (key, value) in baseParameters {
             let baseParameterItem = NSURLQueryItem(name: key, value: value)
