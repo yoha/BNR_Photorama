@@ -12,12 +12,26 @@ enum Method: String {
     case RecentPhotos = "flickr.photos.getRecent"
 }
 
+enum PhotosResult {
+    case Success([Photo])
+    case Failure(ErrorType)
+}
+
+enum FlickrError: ErrorType {
+    case InvalidJSONData
+}
+
 struct FlickrAPI {
     
     // MARK: - Stored Properties
     
     private static let baseURLString = "https://api.flickr.com/services/rest/?"
     private static let APIKey = "ac4c9d25dce464b5e775829d9f5ceec9"
+    private static let dateFormatter: NSDateFormatter = {
+       let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return formatter
+    }()
     
     // MARK: - Local Methods
     
@@ -46,9 +60,57 @@ struct FlickrAPI {
         return validURLComponents.URL ?? nil
     }
     
+    private static func getPhotosFromJSONObject(json: [String: AnyObject]) -> Photo? {
+        guard let
+            title = json["title"] as? String,
+            photoID = json["id"] as? String,
+            date = json["datetaken"] as? String,
+            photoURL = json["url_h"] as? String,
+            url = NSURL(string: photoURL),
+            dateTaken = self.dateFormatter.dateFromString(date) else {
+                
+                // Don't have enough info to construct a photo
+                return nil
+        }
+        return Photo(title: title, remoteURL: url, photoID: photoID, dateTaken: dateTaken)
+    }
+    
     static func getRecentPhotosURL() -> NSURL? {
         guard let validFlickrURL = self.getFlickrURL(method: Method.RecentPhotos, additionalParameters: ["extras": "url_h,date_taken"]) else { return nil }
         return validFlickrURL
+    }
+    
+    static func getPhotosFromJSONData(data: NSData) -> PhotosResult {
+        do {
+            let jsonObject = try NSJSONSerialization.JSONObjectWithData(data, options: [])
+            
+            guard let
+                validJSONDictionary = jsonObject as? [NSObject: AnyObject],
+                validPhotosDictionary = validJSONDictionary["photos"] as? [String: AnyObject],
+                validPhotosArray = validPhotosDictionary["photo"] as? [[String: AnyObject]] else {
+                    
+                    // The JSON struct doesn't match our expectations
+                    return PhotosResult.Failure(FlickrError.InvalidJSONData)
+            }
+            
+            var finalPhotos = [Photo]()
+            for photoJSON in validPhotosArray {
+                if let validPhoto = self.getPhotosFromJSONObject(photoJSON) {
+                    finalPhotos.append(validPhoto)
+                }
+            }
+            
+            if finalPhotos.count == 0 && validPhotosArray.count > 0 {
+                
+                // We weren't able to parse any of the photos. Maybe the JSON format for photos has changed
+                return .Failure(FlickrError.InvalidJSONData)
+            }
+            
+            return PhotosResult.Success(finalPhotos)
+        }
+        catch let error {
+            return .Failure(error)
+        }
     }
     
 }
