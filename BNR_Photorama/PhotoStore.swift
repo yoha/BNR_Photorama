@@ -33,6 +33,12 @@ class PhotoStore {
         let urlRequest = NSURLRequest(URL: validURL)
         // transfer request to the server
         let URlSessionDataTask = self.urlSession.dataTaskWithRequest(urlRequest) { (data, urlResponse, error) -> Void in
+            if let responseHeader = urlResponse as? NSHTTPURLResponse {
+                print("HTTP URL Response Status Code: \(responseHeader.statusCode)")
+                for (key, value) in responseHeader.allHeaderFields {
+                    print("\(key): \(value)")
+                }
+            }
             let result = self.processRecentPhotosRequest(data: data, error: error)
             completion(result)
         }
