@@ -36,7 +36,9 @@ class PhotosViewController: UIViewController {
                 if let firstPhoto = photos.first {
                     self.photoStore.fetchImageForPhoto(firstPhoto, completion: { (imageResult) -> Void in
                         if case let ImageResult.Success(image) = imageResult {
-                            self.imageView.image = image
+                            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                                self.imageView.image = image
+                            })
                         }
                         else if case let .Failure(error) = imageResult {
                             print("Error donwnloading image: \(error)")
