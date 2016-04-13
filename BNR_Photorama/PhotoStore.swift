@@ -6,7 +6,16 @@
 //  Copyright © 2016 Yohannes Wijaya. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+enum ImageResult {
+    case Success(UIImage)
+    case Failure(ErrorType)
+}
+
+enum PhotoError: ErrorType {
+    case ImageCreationError
+}
 
 class PhotoStore {
     
@@ -23,11 +32,25 @@ class PhotoStore {
         guard let validURL = FlickrAPI.getRecentPhotosURL() else { return }
         let urlRequest = NSURLRequest(URL: validURL)
         // transfer request to the server
-        let urlSessionDataTask = self.urlSession.dataTaskWithRequest(urlRequest) { (data, urlResponse, error) -> Void in
+        let URlSessionDataTask = self.urlSession.dataTaskWithRequest(urlRequest) { (data, urlResponse, error) -> Void in
             let result = self.processRecentPhotosRequest(data: data, error: error)
             completion(result)
         }
-        urlSessionDataTask.resume()
+        URlSessionDataTask.resume()
+    }
+    
+    func fetchImageForPhoto(photo: Photo, completion: (ImageResult) -> Void) {
+        let photoURL = photo.remoteURL
+        let URLRequest = NSURLRequest(URL: photoURL)
+        
+        let URLSessionDataTask = self.urlSession.dataTaskWithRequest(URLRequest) { (data, urlResponse, error) -> Void in
+            let result = self.processImageRequest(data: data, error: error)
+            if case let .Success(image) = result {
+                photo.image = image
+            }
+            completion(result)
+        }
+        URLSessionDataTask.resume()
     }
     
     func processRecentPhotosRequest(data data: NSData?, error: NSError?) -> PhotosResult {
@@ -35,5 +58,14 @@ class PhotoStore {
             return PhotosResult.Failure(error!)
         }
         return FlickrAPI.getPhotosFromJSONData(validJSONData)
+    }
+    
+    func processImageRequest(data data: NSData?, error: NSError?) -> ImageResult {
+        guard let
+            imageData = data,
+            image = UIImage(data: imageData) else {
+                return data == nil ? ImageResult.Failure(error!) : .Failure(PhotoError.ImageCreationError)
+        }
+        return .Success(image)
     }
 }

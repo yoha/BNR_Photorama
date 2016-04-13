@@ -24,10 +24,27 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         
         self.photoStore.fetchRecentPhotos { (photosResult) -> Void in
-            switch photosResult {
-            case let PhotosResult.Success(photos):
+//            switch photosResult {
+//            case let PhotosResult.Success(photos):
+//                print("Successfully found \(photos.count) recent photos.")
+//            case let PhotosResult.Failure(error):
+//                print("Error fetching recent photos: \(error)")
+//            }
+            if case let PhotosResult.Success(photos) = photosResult {
                 print("Successfully found \(photos.count) recent photos.")
-            case let PhotosResult.Failure(error):
+                
+                if let firstPhoto = photos.first {
+                    self.photoStore.fetchImageForPhoto(firstPhoto, completion: { (imageResult) -> Void in
+                        if case let ImageResult.Success(image) = imageResult {
+                            self.imageView.image = image
+                        }
+                        else if case let .Failure(error) = imageResult {
+                            print("Error donwnloading image: \(error)")
+                        }
+                    })
+                }
+            }
+            else if case let .Failure(error) = photosResult {
                 print("Error fetching recent photos: \(error)")
             }
         }
