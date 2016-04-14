@@ -24,6 +24,8 @@ class PhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.photoDataSource = PhotoDataSource()
+        
         self.photoStore.fetchRecentPhotos { (photosResult) -> Void in
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                 if case let PhotosResult.Success(photos) = photosResult {
@@ -37,8 +39,6 @@ class PhotosViewController: UIViewController {
                 self.collectionView.reloadSections(NSIndexSet(index: 0))
             })
         }
-        
-        self.photoDataSource = PhotoDataSource()
         self.collectionView.dataSource = self.photoDataSource
     }
 }
