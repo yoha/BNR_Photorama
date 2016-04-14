@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Photorama-->
@@ -18,22 +17,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ILr-ZQ-zrl">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
-                            </imageView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4ID-6J-pdM">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lI7-i0-nxg">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UICollectionViewCell" id="46F-ZH-85S">
+                                        <rect key="frame" x="0.0" y="64" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="ILr-ZQ-zrl" secondAttribute="trailing" constant="-20" id="JTJ-NZ-gMm"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ILr-ZQ-zrl" secondAttribute="bottom" id="L1j-DF-wK3"/>
-                            <constraint firstItem="ILr-ZQ-zrl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="b6M-fV-i5U"/>
-                            <constraint firstItem="ILr-ZQ-zrl" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="jVR-vL-n0B"/>
+                            <constraint firstItem="4ID-6J-pdM" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="RzS-Me-u1T"/>
+                            <constraint firstAttribute="bottom" secondItem="4ID-6J-pdM" secondAttribute="bottom" id="UBD-Qg-32P"/>
+                            <constraint firstItem="4ID-6J-pdM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="por-DD-dpi"/>
+                            <constraint firstAttribute="trailing" secondItem="4ID-6J-pdM" secondAttribute="trailing" id="xSo-zg-KQL"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Photorama" id="2od-hr-9wJ"/>
-                    <connections>
-                        <outlet property="imageView" destination="ILr-ZQ-zrl" id="6L2-wl-XTQ"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
