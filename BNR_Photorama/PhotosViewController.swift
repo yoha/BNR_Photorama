@@ -12,11 +12,12 @@ class PhotosViewController: UIViewController {
     
     // MARK: - IBOutlet Properties
     
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: - Stored Properties
     
     var photoStore: PhotoStore!
+    var photoDataSource: PhotoDataSource!
     
     // MARK: - UIViewController Methods
     
@@ -24,31 +25,20 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         
         self.photoStore.fetchRecentPhotos { (photosResult) -> Void in
-//            switch photosResult {
-//            case let PhotosResult.Success(photos):
-//                print("Successfully found \(photos.count) recent photos.")
-//            case let PhotosResult.Failure(error):
-//                print("Error fetching recent photos: \(error)")
-//            }
-            if case let PhotosResult.Success(photos) = photosResult {
-                print("Successfully found \(photos.count) recent photos.")
-                
-                if let firstPhoto = photos.first {
-                    self.photoStore.fetchImageForPhoto(firstPhoto, completion: { (imageResult) -> Void in
-                        if case let ImageResult.Success(image) = imageResult {
-                            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                                self.imageView.image = image
-                            })
-                        }
-                        else if case let .Failure(error) = imageResult {
-                            print("Error donwnloading image: \(error)")
-                        }
-                    })
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                if case let PhotosResult.Success(photos) = photosResult {
+                    print("Successfully found \(photos.count) recent photos")
+                    self.photoDataSource.photos = photos
                 }
-            }
-            else if case let .Failure(error) = photosResult {
-                print("Error fetching recent photos: \(error)")
-            }
+                else if case let .Failure(error) = photosResult {
+                    self.photoDataSource.photos.removeAll()
+                    print("Error fetching recent photos: \(error)")
+                }
+                self.collectionView.reloadSections(NSIndexSet(index: 0))
+            })
         }
+        
+        self.photoDataSource = PhotoDataSource()
+        self.collectionView.dataSource = self.photoDataSource
     }
 }
