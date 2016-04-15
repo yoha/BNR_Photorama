@@ -64,4 +64,13 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate {
         
         self.collectionView.delegate = self
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        guard segue.identifier == "ShowPhotoSegue" else { return }
+        guard let validSelectedIndexPath = self.collectionView.indexPathsForSelectedItems()?.first else { return }
+        guard let validDestinationViewController = segue.destinationViewController as? PhotoInfoViewController else { return }
+        let selectedPhoto = self.photoDataSource.photos[validSelectedIndexPath.row]
+        validDestinationViewController.photo = selectedPhoto
+        validDestinationViewController.photoStore = self.photoStore
+    }
 }

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Photorama-->
@@ -55,6 +56,7 @@
                                         <connections>
                                             <outlet property="activityIndicatorView" destination="7uq-Hf-GtB" id="kh0-oA-eDE"/>
                                             <outlet property="imageView" destination="K8L-1U-Oro" id="E3g-A9-dl3"/>
+                                            <segue destination="sQE-wZ-h9E" kind="show" identifier="ShowPhotoSegue" id="ReT-G6-Mbf"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -76,6 +78,38 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1377" y="550"/>
+        </scene>
+        <!--Photo Info View Controller-->
+        <scene sceneID="fis-o1-qjj">
+            <objects>
+                <viewController id="sQE-wZ-h9E" customClass="PhotoInfoViewController" customModule="BNR_Photorama" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Iue-G4-m0S"/>
+                        <viewControllerLayoutGuide type="bottom" id="Qoc-P0-qmP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yYX-LU-PBd">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NwB-7k-MVO">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="NwB-7k-MVO" firstAttribute="top" secondItem="Iue-G4-m0S" secondAttribute="bottom" id="3sY-KJ-a6x"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="NwB-7k-MVO" secondAttribute="trailing" constant="-20" id="EqO-dm-3lF"/>
+                            <constraint firstItem="Qoc-P0-qmP" firstAttribute="top" secondItem="NwB-7k-MVO" secondAttribute="bottom" id="gPA-wn-KWv"/>
+                            <constraint firstItem="NwB-7k-MVO" firstAttribute="leading" secondItem="yYX-LU-PBd" secondAttribute="leadingMargin" constant="-20" id="yRi-KB-w8c"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="NwB-7k-MVO" id="0Lu-Lt-ZtL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UGS-eR-aeG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2125" y="550"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4Pt-o9-tHl">

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		656EC68D1CBF569A000767DE /* PhotoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656EC68C1CBF569A000767DE /* PhotoDataSource.swift */; };
 		656EC68F1CBFBBEC000767DE /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656EC68E1CBFBBEC000767DE /* PhotoCollectionViewCell.swift */; };
+		656EC6911CC0D28D000767DE /* PhotoInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656EC6901CC0D28D000767DE /* PhotoInfoViewController.swift */; };
 		6570F6111CBCB4F900CB285A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6570F6101CBCB4F900CB285A /* AppDelegate.swift */; };
 		6570F6161CBCB4F900CB285A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6570F6141CBCB4F900CB285A /* Main.storyboard */; };
 		6570F6181CBCB4F900CB285A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6570F6171CBCB4F900CB285A /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		656EC68C1CBF569A000767DE /* PhotoDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDataSource.swift; sourceTree = "<group>"; };
 		656EC68E1CBFBBEC000767DE /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		656EC6901CC0D28D000767DE /* PhotoInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoInfoViewController.swift; sourceTree = "<group>"; };
 		6570F60D1CBCB4F900CB285A /* BNR_Photorama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BNR_Photorama.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6570F6101CBCB4F900CB285A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6570F6151CBCB4F900CB285A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -66,12 +68,13 @@
 			children = (
 				6570F6241CBCB97400CB285A /* FlickrAPI.swift */,
 				6570F6281CBD054900CB285A /* Photo.swift */,
+				656EC68E1CBFBBEC000767DE /* PhotoCollectionViewCell.swift */,
+				656EC68C1CBF569A000767DE /* PhotoDataSource.swift */,
+				656EC6901CC0D28D000767DE /* PhotoInfoViewController.swift */,
 				6570F6261CBCED0B00CB285A /* PhotoStore.swift */,
 				6570F6221CBCB53300CB285A /* PhotosViewController.swift */,
 				6570F6101CBCB4F900CB285A /* AppDelegate.swift */,
 				6570F6141CBCB4F900CB285A /* Main.storyboard */,
-				656EC68E1CBFBBEC000767DE /* PhotoCollectionViewCell.swift */,
-				656EC68C1CBF569A000767DE /* PhotoDataSource.swift */,
 				6570F6171CBCB4F900CB285A /* Assets.xcassets */,
 				6570F6191CBCB4F900CB285A /* LaunchScreen.storyboard */,
 				6570F61C1CBCB4F900CB285A /* Info.plist */,
@@ -156,6 +159,7 @@
 				6570F6271CBCED0B00CB285A /* PhotoStore.swift in Sources */,
 				656EC68D1CBF569A000767DE /* PhotoDataSource.swift in Sources */,
 				656EC68F1CBFBBEC000767DE /* PhotoCollectionViewCell.swift in Sources */,
+				656EC6911CC0D28D000767DE /* PhotoInfoViewController.swift in Sources */,
 				6570F6111CBCB4F900CB285A /* AppDelegate.swift in Sources */,
 				6570F6291CBD054900CB285A /* Photo.swift in Sources */,
 			);
