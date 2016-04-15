@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PhotosViewController: UIViewController {
+class PhotosViewController: UIViewController, UICollectionViewDelegate {
     
     // MARK: - IBOutlet Properties
     
@@ -18,6 +18,27 @@ class PhotosViewController: UIViewController {
     
     var photoStore: PhotoStore!
     var photoDataSource: PhotoDataSource!
+    
+    // MARK: - UICollectionView Data Source Methods
+    
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        let photoToBeDisplayed = self.photoDataSource.photos[indexPath.row]
+        
+        // Download the image data, which could take some time
+        self.photoStore.fetchImageForPhoto(photoToBeDisplayed) { (imageResult) -> Void in
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                
+                // The index path for the photo might have changed between the time the
+                // request started and finished, so find the most recent index path
+                let photoIndex = self.photoDataSource.photos.indexOf { $0 == photoToBeDisplayed }
+                let photoIndexPath = NSIndexPath(forRow: photoIndex!, inSection: 0)
+                
+                // When the request finishes, only update the cell if it's still visible
+                guard let validCell = self.collectionView.cellForItemAtIndexPath(photoIndexPath) as? PhotoCollectionViewCell else { return }
+                validCell.updateWithImage(photoToBeDisplayed.image)
+            })
+        }
+    }
     
     // MARK: - UIViewController Methods
     
@@ -40,5 +61,7 @@ class PhotosViewController: UIViewController {
             })
         }
         self.collectionView.dataSource = self.photoDataSource
+        
+        self.collectionView.delegate = self
     }
 }

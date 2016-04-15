@@ -27,3 +27,12 @@ class Photo {
         self.dateTaken = dateTaken
     }
 }
+
+extension Photo: Equatable {}
+
+// MARK: - Operator Overloading
+
+func == (lhs: Photo, rhs: Photo) -> Bool {
+    // Two photos are the same if they have the same photoID
+    return lhs.photoID == rhs.photoID
+}

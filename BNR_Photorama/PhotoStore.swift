@@ -46,6 +46,11 @@ class PhotoStore {
     }
     
     func fetchImageForPhoto(photo: Photo, completion: (ImageResult) -> Void) {
+        if let existingImage = photo.image {
+            completion(.Success(existingImage))
+            return
+        }
+        
         let photoURL = photo.remoteURL
         let URLRequest = NSURLRequest(URL: photoURL)
         
