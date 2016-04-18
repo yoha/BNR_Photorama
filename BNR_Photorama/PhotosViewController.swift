@@ -48,15 +48,11 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate {
         self.photoDataSource = PhotoDataSource()
         
         self.photoStore.fetchRecentPhotos { (photosResult) -> Void in
-            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                if case let PhotosResult.Success(photos) = photosResult {
-                    print("Successfully found \(photos.count) recent photos")
-                    self.photoDataSource.photos = photos
-                }
-                else if case let .Failure(error) = photosResult {
-                    self.photoDataSource.photos.removeAll()
-                    print("Error fetching recent photos: \(error)")
-                }
+            let sortByDateTaken = NSSortDescriptor(key: "dateTaken", ascending: true)
+            let allPhotos = try! self.photoStore.fetchMainQueuePhotos(predicate: nil, sortDescriptors: [sortByDateTaken])
+            
+            NSOperationQueue.mainQueue().addOperationWithBlock({ 
+                self.photoDataSource.photos = allPhotos
                 self.collectionView.reloadSections(NSIndexSet(index: 0))
             })
         }
