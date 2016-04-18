@@ -41,7 +41,11 @@ class PhotoStore {
                     print("\(key): \(value)")
                 }
             }
-            let result = self.processRecentPhotosRequest(data: data, error: error)
+            var result = self.processRecentPhotosRequest(data: data, error: error)
+            if case .Success(_) = result {
+                do { try self.coreDataStack.saveChanges() }
+                catch let error { result = .Failure(error) }
+            }
             completion(result)
         }
         URlSessionDataTask.resume()
@@ -70,7 +74,7 @@ class PhotoStore {
         guard let validJSONData = data else {
             return PhotosResult.Failure(error!)
         }
-        return FlickrAPI.getPhotosFromJSONData(validJSONData)
+        return FlickrAPI.getPhotosFromJSONData(validJSONData, inContext: self.coreDataStack.mainQueueContext)
     }
     
     func processImageRequest(data data: NSData?, error: NSError?) -> ImageResult {
