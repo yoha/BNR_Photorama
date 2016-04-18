@@ -21,6 +21,8 @@ class PhotoStore {
     
     // MARK: - Stored Properties
     
+    let coreDataStack = CoreDataStack(modelName: "Photorama")
+    
     let urlSession: NSURLSession = {
         let defaultSessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()
         return NSURLSession(configuration: defaultSessionConfiguration)
