@@ -29,6 +29,8 @@ class PhotoStore {
         return NSURLSession(configuration: defaultSessionConfiguration)
     }()
     
+    let imageStore = ImageStore()
+    
     // MARK: - local Methods
     
     func fetchRecentPhotos(completion completion: (PhotosResult) -> Void) {
@@ -65,8 +67,10 @@ class PhotoStore {
     }
     
     func fetchImageForPhoto(photo: Photo, completion: (ImageResult) -> Void) {
-        if let existingImage = photo.image {
-            completion(.Success(existingImage))
+        let photoKey = photo.photoKey
+        if let image = imageStore.getImageForKey(photoKey) {
+            photo.image = image
+            completion(.Success(image))
             return
         }
         
@@ -77,6 +81,7 @@ class PhotoStore {
             let result = self.processImageRequest(data: data, error: error)
             if case let .Success(image) = result {
                 photo.image = image
+                self.imageStore.setImage(image, forKey: photoKey)
             }
             completion(result)
         }
