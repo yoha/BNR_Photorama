@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15F18c" minimumToolsVersion="Xcode 7.0">
-    <entity name="Photo" syncable="YES">
+    <entity name="Photo" representedClassName=".Photo" syncable="YES">
         <attribute name="dateTaken" attributeType="Date" syncable="YES"/>
         <attribute name="photoID" attributeType="String" syncable="YES"/>
         <attribute name="photoKey" attributeType="String" syncable="YES"/>

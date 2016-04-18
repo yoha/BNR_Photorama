@@ -2,37 +2,31 @@
 //  Photo.swift
 //  BNR_Photorama
 //
-//  Created by Yohannes Wijaya on 4/12/16.
+//  Created by Yohannes Wijaya on 4/18/16.
 //  Copyright © 2016 Yohannes Wijaya. All rights reserved.
 //
 
 import UIKit
+import CoreData
 
-class Photo {
+
+class Photo: NSManagedObject {
     
     // MARK: - Stored Properties
     
-    let title: String
-    let remoteURL: NSURL
-    let photoID: String
-    let dateTaken: NSDate
     var image: UIImage?
     
-    // MARK: - Designated Initializer
+    // MARK: - NSManagedObject Methods
     
-    init(title: String, remoteURL: NSURL, photoID: String, dateTaken: NSDate) {
-        self.title = title
-        self.remoteURL = remoteURL
-        self.photoID = photoID
-        self.dateTaken = dateTaken
+    override func awakeFromInsert() {
+        super.awakeFromInsert()
+        
+        // Give the properties their initial values
+        self.title = ""
+        self.photoID = ""
+        self.remoteURL = NSURL()
+        self.photoKey = NSUUID().UUIDString
+        self.dateTaken = NSDate()
     }
-}
-
-extension Photo: Equatable {}
-
-// MARK: - Operator Overloading
-
-func == (lhs: Photo, rhs: Photo) -> Bool {
-    // Two photos are the same if they have the same photoID
-    return lhs.photoID == rhs.photoID
+    
 }
