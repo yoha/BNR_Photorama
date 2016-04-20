@@ -22,6 +22,8 @@
 		6570F6231CBCB53300CB285A /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6570F6221CBCB53300CB285A /* PhotosViewController.swift */; };
 		6570F6251CBCB97400CB285A /* FlickrAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6570F6241CBCB97400CB285A /* FlickrAPI.swift */; };
 		6570F6271CBCED0B00CB285A /* PhotoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6570F6261CBCED0B00CB285A /* PhotoStore.swift */; };
+		65844A9E1CC7406800FC0231 /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65844A9D1CC7406800FC0231 /* TagsViewController.swift */; };
+		65844AA01CC7416200FC0231 /* TagsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65844A9F1CC7416200FC0231 /* TagsDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		6570F6221CBCB53300CB285A /* PhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		6570F6241CBCB97400CB285A /* FlickrAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrAPI.swift; sourceTree = "<group>"; };
 		6570F6261CBCED0B00CB285A /* PhotoStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoStore.swift; sourceTree = "<group>"; };
+		65844A9D1CC7406800FC0231 /* TagsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
+		65844A9F1CC7416200FC0231 /* TagsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,11 +82,13 @@
 				656FE2461CC4D78B005DC715 /* ImageStore.swift */,
 				653D31551CC4916D00B66185 /* Photo+CoreDataProperties.swift */,
 				653D31561CC4916D00B66185 /* Photo.swift */,
-				656EC68E1CBFBBEC000767DE /* PhotoCollectionViewCell.swift */,
 				656EC68C1CBF569A000767DE /* PhotoDataSource.swift */,
+				656EC68E1CBFBBEC000767DE /* PhotoCollectionViewCell.swift */,
 				656EC6901CC0D28D000767DE /* PhotoInfoViewController.swift */,
 				6570F6261CBCED0B00CB285A /* PhotoStore.swift */,
 				6570F6221CBCB53300CB285A /* PhotosViewController.swift */,
+				65844A9D1CC7406800FC0231 /* TagsViewController.swift */,
+				65844A9F1CC7416200FC0231 /* TagsDataSource.swift */,
 				653D31591CC496DC00B66185 /* CoreDataStack.swift */,
 				653D31521CC48AFD00B66185 /* Photorama.xcdatamodeld */,
 				6570F6101CBCB4F900CB285A /* AppDelegate.swift */,
@@ -172,6 +178,8 @@
 				6570F6271CBCED0B00CB285A /* PhotoStore.swift in Sources */,
 				653D31581CC4916D00B66185 /* Photo.swift in Sources */,
 				656EC68D1CBF569A000767DE /* PhotoDataSource.swift in Sources */,
+				65844A9E1CC7406800FC0231 /* TagsViewController.swift in Sources */,
+				65844AA01CC7416200FC0231 /* TagsDataSource.swift in Sources */,
 				653D315A1CC496DC00B66185 /* CoreDataStack.swift in Sources */,
 				656EC68F1CBFBBEC000767DE /* PhotoCollectionViewCell.swift in Sources */,
 				653D31571CC4916D00B66185 /* Photo+CoreDataProperties.swift in Sources */,

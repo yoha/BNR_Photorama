@@ -29,4 +29,15 @@ class Photo: NSManagedObject {
         self.dateTaken = NSDate()
     }
     
+    // MARK: - Local Methods
+    
+    func addTagObject(tag: NSManagedObject) {
+        let currentTags = self.mutableSetValueForKey("tags")
+        currentTags.addObject(tag)
+    }
+    
+    func removeTagObject(tag: NSManagedObject) {
+        let currentTags = self.mutableSetValueForKey("tags")
+        currentTags.removeObject(tag)
+    }
 }
