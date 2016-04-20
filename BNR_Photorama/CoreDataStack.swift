@@ -45,6 +45,13 @@ class CoreDataStack {
         return managedObjectContext
     }()
     
+    lazy var privateQueueContext: NSManagedObjectContext = {
+       let managedObjectContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        managedObjectContext.parentContext = self.mainQueueContext
+        managedObjectContext.name = "Primary Private Queue Context"
+        return managedObjectContext
+    }()
+    
     // MARK: - Designated Initializer
     
     required init(modelName: String) {
@@ -55,6 +62,21 @@ class CoreDataStack {
     
     func saveChanges() throws {
         var error: ErrorType?
+        
+        self.privateQueueContext.performBlockAndWait { 
+            if self.privateQueueContext.hasChanges {
+                do {
+                    try self.privateQueueContext.save()
+                }
+                catch let saveError {
+                    error = saveError
+                }
+            }
+        }
+        if let error = error {
+            throw error
+        }
+        
         mainQueueContext.performBlockAndWait {
             if self.mainQueueContext.hasChanges {
                 do { try self.mainQueueContext.save() }
